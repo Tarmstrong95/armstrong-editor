@@ -11,9 +11,9 @@
     "start": "electron-forge start dist/App.js",
     "b:s": "npm run build && npm run start",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "package": "electron-forge package",
-    "make": "electron-forge make",
-    "publish": "electron-forge publish",
+    "package": "npm run build && electron-forge package",
+    "make": "npm run build && electron-forge make",
+    "publish": "npm run build && electron-forge publish",
     "build": "./node_modules/.bin/tsc"
   },
   "author": "Triston Armstrong",
