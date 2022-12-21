@@ -2,19 +2,27 @@
   "name": "armstrong-editor",
   "version": "1.0.1",
   "description": "A custom text editor for writing javascript, html, and css code",
-  "main": "dist/App.js",
+  "main": "dist/main/index.cjs",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Tarmstrong95/armstrong-editor.git"
   },
   "scripts": {
-    "start": "electron-forge start dist/App.js",
-    "b:s": "npm run build && npm run start",
+    "_____no-op": "____ here begins run scripts ____",
+    "start": "electron-forge start dist/main",
+    "b:s": "npm run _build && npm run start",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "package": "npm run build && electron-forge package",
-    "make": "npm run build && electron-forge make",
-    "publish": "npm run build && electron-forge publish",
-    "build": "./node_modules/.bin/tsc"
+    "dev": "cross-env NODE_ENV=development ts-node scripts/dev-server.ts",
+    "dev:renderer": "vite packages/renderer",
+    "_____no-op2": "____ here begins create scripts ____",
+    "package": "npm run _build && electron-forge package",
+    "make": "npm run _build && electron-forge make",
+    "publish": "npm run _build && electron-forge publish",
+    "_____no-op3": "____ here begins util scripts ____",
+    "_build:renderer": "./node_modules/.bin/tsc --p packages/renderer/tsconfig.json --noEmit && vite build packages/renderer",
+    "_build:preload": "tsc -p packages/preload/tsconfig.json --noEmit && vite build packages/preload",
+    "_build:main": "tsc -p packages/main/tsconfig.json --noEmit && vite build packages/main",
+    "_build": "npm run _build:renderer && npm run _build:preload && npm run _build:main"
   },
   "author": "Triston Armstrong",
   "license": "MIT",
@@ -26,11 +34,14 @@
     "@electron-forge/maker-zip": "^6.0.4",
     "@electron-forge/publisher-github": "^6.0.4",
     "@types/electron": "^1.6.10",
+    "cross-env": "^7.0.3",
     "electron": "^22.0.0",
+    "ts-node": "^10.9.1",
     "typescript": "^4.9.4"
   },
   "dependencies": {
     "electron-squirrel-startup": "^1.0.0",
-    "update-electron-app": "^2.0.1"
+    "update-electron-app": "^2.0.1",
+    "vite": "^4.0.2"
   }
 }

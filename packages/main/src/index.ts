@@ -1,10 +1,15 @@
-import { BrowserWindow } from "electron";
-import path from 'path'
+import { app, BrowserWindow } from "electron";
+import * as path from 'path'
+
+interface Constructable<T> {
+    new(...args: any) : T;
+}
+
 
 export default class Main {
-    static mainWindow: Electron.BrowserWindow
+    static mainWindow: Electron.BrowserWindow | null
     static application: Electron.App
-    static BrowserWindow
+    static BrowserWindow: Constructable<Electron.BrowserWindow>
 
     private static onWindowClosed() {
         if(process.platform !== 'darwin'){
@@ -17,16 +22,19 @@ export default class Main {
     }
 
     private static createWindow(){
-        console.log(path.join(__dirname, 'preload.js'))
         Main.mainWindow = new Main.BrowserWindow({width: 800, height: 600, webPreferences:{
-            preload: path.join(__dirname, 'preload.js')
+            webviewTag: false,
+            preload: path.join(__dirname, '../preload/index.cjs')
         }})
-        Main.mainWindow.loadFile('index.html')
+        const pageUrl = process.env.DEV
+    ? 'http://localhost:3000'
+    : new URL('../dist/renderer/index.html', `file://${__dirname}`).toString()
+        Main.mainWindow?.loadURL(pageUrl)
     }
 
     private static onReady(){
         Main.createWindow()
-        Main.mainWindow.on('closed', Main.onClose)
+        Main.mainWindow?.on('closed', Main.onClose)
         Main.application.on('activate', () => {
             if (BrowserWindow.getAllWindows().length === 0) Main.createWindow()
         })
@@ -39,3 +47,6 @@ export default class Main {
         Main.application.on('ready', Main.onReady)
     }
 }
+
+
+Main.main(app, BrowserWindow)
