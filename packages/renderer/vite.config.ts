@@ -1,9 +1,11 @@
 import { join } from 'node:path'
 import { builtinModules } from 'node:module'
 import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+
 
 export default defineConfig({
-  plugins: [],
+  plugins: [react()],
   // Please note that `__dirname = packages/renderer` in this context.
   root: __dirname,
   base: './',
