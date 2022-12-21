@@ -24,10 +24,14 @@
     "noImplicitReturns": true,
     "skipLibCheck": true
   },
-  "exclude": [
-    "node_modules"
-  ],
   "include": [
-    "packages/**/*"
+    "./**/*.ts",
+    "./**/*.d.ts",
+    "./**/*.tsx"
+  ],
+  "references": [
+    {
+      "path": "../../tsconfig.json"
+    }
   ]
 }

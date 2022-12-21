@@ -1,6 +1,6 @@
 module.exports = {
   packagerConfig: {
-    icon: './src/icns/owl.icns'
+    icon: './packages/main/src/icns/owl.icns'
   },
   rebuildConfig: {},
   makers: [
