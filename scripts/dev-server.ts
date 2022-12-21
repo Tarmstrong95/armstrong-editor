@@ -30,16 +30,16 @@ const setupPreloadWatcher = async (viteServer: ViteDevServer) =>
     // Send a "full-reload" page event using Vite WebSocket server.
     viteServer.ws.send({ type: 'full-reload' })
   })
-
-/**
- * Setup the `main` watcher.
- */
-const setupMainWatcher = async () => {
-  const logger = createLogger('info', { prefix: '[main]' })
-  let spawnProcess: ChildProcessWithoutNullStreams | null = null
-
-  return getWatcher('reload-app-on-main-package-change', 'packages/main/vite.config.ts', () => {
-    if (spawnProcess !== null) {
+  
+  /**
+   * Setup the `main` watcher.
+  */
+ const setupMainWatcher = async () => {
+   const logger = createLogger('info', { prefix: '[main]' })
+   let spawnProcess: ChildProcessWithoutNullStreams | null = null
+   
+   return getWatcher('reload-app-on-main-package-change', 'packages/main/vite.config.ts', () => {
+     if (spawnProcess !== null) {
       spawnProcess.off('exit', () => process.exit(0))
       spawnProcess.kill('SIGINT')
       spawnProcess = null
