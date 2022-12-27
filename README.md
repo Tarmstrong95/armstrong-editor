@@ -1,23 +1,7 @@
-## Installing
-Run `npm i` to install dependencies
+# Tauri + React + Typescript
 
-## Building
-Run `npm run make` to build the project
--> to `out` folder
+This template should help get you started developing with Tauri, React and Typescript in Vite.
 
-## Running
-Run `npm start` to run the app without building
+## Recommended IDE Setup
 
-
-## Contributing
-
-1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
-
-
-## License
-
-MIT
+- [VS Code](https://code.visualstudio.com/) + [Tauri](https://marketplace.visualstudio.com/items?itemName=tauri-apps.tauri-vscode) + [rust-analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer)
