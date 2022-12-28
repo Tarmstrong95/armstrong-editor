@@ -1,7 +1,34 @@
-.logo.vite:hover {
-  filter: drop-shadow(0 0 2em #747bff);
+html, body {
+padding: unset;
+margin: unset;
+overflow: hidden;
 }
 
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafb);
+body {
+ height: 100vh;
+}
+
+#root {
+height: 100%;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #b4b4b4;
+  border-radius: 4px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
