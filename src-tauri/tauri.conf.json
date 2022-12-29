@@ -11,7 +11,13 @@
   },
   "tauri": {
     "allowlist": {
-      "all": true
+      "all": true,
+      "fs": {
+        "readFile": true,
+        "writeFile": true,
+        "readDir": true,
+        "scope": ["$HOME/**/*"]
+     }
     },
     "bundle": {
       "active": true,

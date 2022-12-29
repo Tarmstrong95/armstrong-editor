@@ -11,8 +11,6 @@ const darkTheme = createTheme({
 });
 
 function App() {
-  const { setFileContentsRef } = useSharedState();
-
   return (
     <ThemeProvider theme={darkTheme}>
       <Paper elevation={0} sx={{ p: 1, height: "100%" }}>

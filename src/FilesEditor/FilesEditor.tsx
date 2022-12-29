@@ -1,13 +1,13 @@
 import { Cancel } from "@mui/icons-material";
 import { Grid, Paper, Stack, Typography } from "@mui/material";
-import { Ref, useRef } from "react";
+import { Ref, useEffect, useRef } from "react";
 import { useSharedState } from "../Contexts/SharedStateContext";
 import CodeEditor from "@uiw/react-textarea-code-editor";
 import { Tabs } from "./Tabs";
 
 
 export const FilesEditor = () => {
-    const {fileContentsRef, setFileContentsRef, fileName, setFileName} = useSharedState()
+    const {fileContentsRef, setFileContentsRef, fileInFocus: fileName, setFileInFocus: setFileName} = useSharedState()
 
     const textRef = useRef<HTMLTextAreaElement>();
   
@@ -27,7 +27,8 @@ export const FilesEditor = () => {
         <Grid item xs={10} md={10}>
             <Stack gap={1} height="100%" sx={{ height: '95vh' }}>
               <Tabs/>
-              <Paper sx={{ flex: 12, p: 2, overflow: 'auto' }} elevation={1}>
+              {!fileName && <Typography variant="h2" textAlign={'center'}>No File Selected</Typography>}
+              {!!fileName && <Paper sx={{ flex: 12, p: 2, overflow: 'auto' }} elevation={1}>
                 <CodeEditor
                   value={fileContentsRef ?? ''}
                   ref={textRef as Ref<HTMLTextAreaElement>}
@@ -40,7 +41,7 @@ export const FilesEditor = () => {
                     fontFamily: 'ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace',
                   }}
                 />
-              </Paper>
+              </Paper>}
             </Stack>
           </Grid>
     )

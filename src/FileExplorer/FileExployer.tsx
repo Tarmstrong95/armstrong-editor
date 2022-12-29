@@ -2,19 +2,16 @@ import { Grid, Paper, Typography, Divider, Button } from "@mui/material";
 import { open } from "@tauri-apps/api/dialog";
 import { readTextFile } from "@tauri-apps/api/fs";
 import { useSharedState } from "../Contexts/SharedStateContext";
+import { FileTree } from "./FileTree";
 
 export const FileExplorer = () => {
-  const { setFileName, setFileContentsRef, fileContentsRef } = useSharedState();
-
-  const readFile = async (filePath: string) => {
-    if (!filePath) return;
-    setFileContentsRef(await readTextFile(filePath));
-  };
+  const { setFileName, setFileContentsRef, fileContentsRef, fileName } = useSharedState();
 
   const getFile = async () => {
     let selectedPath: string | string[] | null = "";
     try {
       selectedPath = await open({
+        directory: true,
         multiple: false,
         title: "Open a file",
       });
@@ -23,7 +20,6 @@ export const FileExplorer = () => {
     }
     if (typeof selectedPath === "string") {
       setFileName(selectedPath);
-      await readFile(selectedPath);
     } else {
       alert("Cannot open this file");
     }
@@ -34,7 +30,7 @@ export const FileExplorer = () => {
       <Paper sx={{ p: 2, height: "90vh" }} elevation={1}>
         <Typography>Explorer</Typography>
         <Divider />
-        {!fileContentsRef && (
+        {!fileName && (
           <Button
             onClick={getFile}
             color='warning'
@@ -46,6 +42,8 @@ export const FileExplorer = () => {
             Open File
           </Button>
         )}
+
+        {!!fileName && <FileTree/> }
       </Paper>
     </Grid>
   );
