@@ -1,11 +1,9 @@
 html, body {
 padding: unset;
 margin: unset;
-overflow: hidden;
 }
 
 body {
- height: 100vh;
 }
 
 #root {

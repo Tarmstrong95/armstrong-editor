@@ -10,14 +10,16 @@
     "version": "0.0.0"
   },
   "tauri": {
+    "macOSPrivateApi": true,
     "allowlist": {
       "all": true,
       "fs": {
-        "readFile": true,
-        "writeFile": true,
-        "readDir": true,
+        "all": true,
         "scope": ["$HOME/**/*"]
-     }
+      },
+      "path": {
+        "all": true
+      }
     },
     "bundle": {
       "active": true,
@@ -64,7 +66,8 @@
         "height": 600,
         "resizable": true,
         "title": "armstrong-editor",
-        "width": 800
+        "width": 800,
+        "transparent": true 
       }
     ]
   }

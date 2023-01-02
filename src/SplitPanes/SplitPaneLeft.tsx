@@ -1,15 +1,20 @@
-import { useContext, useEffect, useRef } from "react";
+import { CSSProperties, ReactNode, useEffect, useRef } from "react";
 import './index.css'
 import { useSplitPaneContext } from "./SplitPaneContext";
 
-export const SplitPaneLeft: React.FC<{children?: React.ReactNode, className?: string}> = (props) => {
+interface SplitPaneLeftProps {
+children?: ReactNode
+className?: string
+style?: CSSProperties
+}
+
+export const SplitPaneLeft: React.FC<SplitPaneLeftProps> = (props) => {
     const topRef = useRef<HTMLDivElement>(null);
     const { clientWidth, setClientWidth } = useSplitPaneContext()
   
     useEffect(() => {
       if (!clientWidth) {
-        topRef.current && setClientWidth(topRef.current.clientWidth / 2);
-        return;
+        topRef.current && setClientWidth(topRef.current.clientWidth / 2); return;
       }
   
       if (topRef.current){

@@ -1,18 +1,27 @@
 import React, {
+    CSSProperties,
+    ReactNode,
     useEffect,
     useRef,
     useState,
   } from "react";
   import {SplitPaneContext} from "./SplitPaneContext";
-  
-  export const SplitPane: React.FC<{children: React.ReactNode, className: string}> = ({ children, ...props }) => {
+ 
+
+interface SplitPaneProps {
+children: ReactNode
+className: string
+style?: CSSProperties
+}
+
+  export const SplitPane: React.FC<SplitPaneProps> = ({ children, ...props }) => {
     const [clientHeight, setClientHeight] = useState<number|null>(null);
     const [clientWidth, setClientWidth] = useState<number|null>(null);
     const yDividerPos = useRef<number|null>(null);
     const xDividerPos = useRef<number|null>(null);
     const [holding, setHolding] = useState(false)
   
-    const onMouseHoldDown = (e: React.MouseEvent) => {
+    const onMouseHoldDown = (_e: React.MouseEvent) => {
       setHolding(true)
     };
   
@@ -24,6 +33,10 @@ import React, {
   
     const onMouseHoldMove = (e: MouseEvent) => {
       if (!holding) return
+
+      e = e || window.event 
+      e.stopPropagation()
+      e.preventDefault()
 
       clientHeight && yDividerPos.current && setClientHeight(clientHeight + e.clientY - yDividerPos.current);
       clientWidth && xDividerPos.current && setClientWidth(clientWidth + e.clientX - xDividerPos.current);

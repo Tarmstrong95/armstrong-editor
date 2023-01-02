@@ -1,15 +1,15 @@
-import { createTheme, Grid, Paper, ThemeProvider } from "@mui/material";
+import { createTheme, ThemeProvider } from "@mui/material";
+import { Box, Stack } from "@mui/system";
 import "./App.css";
 import { FileExplorer } from "./FileExplorer";
 import { FilesEditor } from "./FilesEditor/FilesEditor";
-import { useSharedState } from "./Contexts/SharedStateContext";
 import {
   SplitPane,
-  SplitPaneBottom,
   SplitPaneLeft,
   SplitPaneRight,
-  SplitPaneTop,
   Divider,
+  SplitPaneTop,
+  SplitPaneBottom,
 } from "./SplitPanes";
 
 const darkTheme = createTheme({
@@ -21,18 +21,22 @@ const darkTheme = createTheme({
 function App() {
   return (
     <ThemeProvider theme={darkTheme}>
-      <Paper elevation={0} sx={{ p: 1, height: "100%" }}>
-        <SplitPane className="split-pane-row">
-          <SplitPaneLeft>
-            <FileExplorer />
-          </SplitPaneLeft>
-          <Divider className="separator-col" />
+      <Stack display={'grid'} gridTemplateRows={'1fr 20px'} height={'100vh'}>
+          <SplitPane style={{overflowY: 'auto'}} className="split-pane-row">
+            <SplitPaneLeft>
+              <FileExplorer />
+            </SplitPaneLeft>
 
-          <SplitPaneRight>
-            <FilesEditor />
-          </SplitPaneRight>
-        </SplitPane>
-      </Paper>
+            <Divider className="separator col" />
+
+            <SplitPaneRight >
+              <FilesEditor />
+            </SplitPaneRight>
+          </SplitPane>
+        <Box sx={{display: 'flex', alignItems: 'center', color: 'white',fontSize: '.8rem', width: "100%", backgroundColor: '#0007', px: 1, boxSizing: 'border-box', overflow: 'hidden'}}>
+          Something
+        </Box>
+      </Stack>
     </ThemeProvider>
   );
 }

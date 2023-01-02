@@ -11,15 +11,11 @@ body {
 }
 
 .split-pane-col {
-  width: 100vw;
-  height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
 .split-pane-row {
-  width: 100vw;
-  height: 100vh;
   display: flex;
   flex-direction: row;
 }
@@ -29,20 +25,32 @@ body {
 .split-pane-right,
 .split-pane-left {
   flex: 1;
-  overflow: hidden;
 }
 
 .split-pane-top,
 .split-pane-bottom {
-  padding: 2%;
+  padding: 10px;
 }
 
-.separator-col {
-  border: 5px solid black;
+.separator {
+  border: 1px solid lightgrey;
+  background-color: lightgrey;
+  transition: all .5s;
+}
+
+.col{
   cursor: col-resize;
 }
+.col:hover {
+  background-color: lightblue;
+  border: 2px solid lightblue; 
+}
 
-.separator-row {
-  border: 5px solid black;
+.row{
+  border: 1px solid transparent;
   cursor: row-resize;
+}
+.row:hover {
+  border: 2px solid lightblue;
+  background-color: lightblue;
 }

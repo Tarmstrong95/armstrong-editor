@@ -1,9 +1,14 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
-
+import  {prismjsPlugin} from 'vite-plugin-prismjs'
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), prismjsPlugin({
+    languages: ["ts", "tsx", "css", "md", "json", "toml", "rust"],
+    plugins: ["line-numbers"],
+    theme: "twilight",
+    css: true
+  })],
 
   // Vite options tailored for Tauri development and only applied in `tauri dev` or `tauri build`
   // prevent vite from obscuring rust errors

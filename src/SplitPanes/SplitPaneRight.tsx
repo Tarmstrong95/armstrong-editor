@@ -1,6 +1,12 @@
+import { CSSProperties, ReactNode } from 'react';
 import './index.css'
 
-export const SplitPaneRight: React.FC<{children?: React.ReactNode}> = (props) => {
+interface SplitPaneRightProps {
+children?: ReactNode
+style?: CSSProperties
+}
+
+export const SplitPaneRight: React.FC<SplitPaneRightProps> = (props) => {
   
     return (
       <div {...props} className="split-pane-right"/>

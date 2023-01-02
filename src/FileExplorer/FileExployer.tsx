@@ -1,6 +1,6 @@
 import { Grid, Paper, Typography, Divider, Button } from "@mui/material";
+import { Container, Stack } from "@mui/system";
 import { open } from "@tauri-apps/api/dialog";
-import { readTextFile } from "@tauri-apps/api/fs";
 import { useSharedState } from "../Contexts/SharedStateContext";
 import { FileTree } from "./FileTree";
 
@@ -13,7 +13,7 @@ export const FileExplorer = () => {
       selectedPath = await open({
         directory: true,
         multiple: false,
-        title: "Open a file",
+        title: "Open a folder",
       });
     } catch (err) {
       console.error(err);
@@ -26,25 +26,26 @@ export const FileExplorer = () => {
   };
 
   return (
-    <Grid item xs={2} md={2} minWidth={150}>
-      <Paper sx={{ p: 2, height: "90vh" }} elevation={1}>
-        <Typography>Explorer</Typography>
-        <Divider />
+      <Container maxWidth='md' sx={{ pt: 1 }}>
+        <Typography mb={3} variant='h6' fontWeight={'bold'} color={"textPrimary"}>Explorer</Typography>
+
+
         {!fileName && (
-          <Button
-            onClick={getFile}
-            color='warning'
-            size="small"
-            variant="contained"
-            fullWidth
-            sx={{ mt: 1 }}
-          >
-            Open File
-          </Button>
+          <Stack alignItems={'center'} gap={1}>
+            <Typography textAlign={'center'} color={"textPrimary"}>You have not opened a directory yet!</Typography>
+            <Button
+              onClick={getFile}
+              color='primary'
+              size="small"
+              variant="contained"
+              sx={{ mt: 1, width: '100%', maxWidth: 200 }}
+            >
+              Open File
+            </Button>
+          </Stack>
         )}
 
-        {!!fileName && <FileTree/> }
-      </Paper>
-    </Grid>
+        {!!fileName && <FileTree />}
+      </Container>
   );
 };

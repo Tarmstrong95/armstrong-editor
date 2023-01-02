@@ -1,11 +1,16 @@
-import { useContext } from "react";
+import { CSSProperties, ReactNode, useContext } from "react";
 import './index.css'
 
-export const SplitPaneBottom: React.FC = (props) => {
-  
-    return (
-      <div {...props} className="split-pane-bottom">
-        Some pane
-      </div>
-    );
-  };
+interface SplitPaneBottomProps {
+children: ReactNode
+style: CSSProperties
+}
+
+export const SplitPaneBottom: React.FC<SplitPaneBottomProps> = (props) => {
+
+  return (
+    <div {...props} className="split-pane-bottom">
+      {props.children}
+    </div>
+  );
+};
